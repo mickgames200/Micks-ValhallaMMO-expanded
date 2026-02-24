@@ -1,0 +1,10 @@
+put the .zip still zipped in your datapacks folder if your valhallammo is still unchanged you can just replace the progression configs from valhallmmo/skills with the ones here
+and change in your server.properties the resourcepack entries with this
+
+require-resource-pack=true
+resource-pack=https\://download.mc-packs.net/pack/87b4d7aa0d75a208525e01ddc425bd091f43ec14.zip
+resource-pack-id=
+resource-pack-prompt=
+resource-pack-sha1=87b4d7aa0d75a208525e01ddc425bd091f43ec14
+
+  this is the standard valhallammo texture pack edited in a way so the advancements can use the custom icons please dont reload your valhalla resourcepack via the command of valhalla since that will break these advancements
