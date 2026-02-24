@@ -1,0 +1,40 @@
+
+ fairy:
+    position: 25
+    icon: FEATHER:-1 # Icon in racepicker GUI
+    icon_locked: BARRIER:-1 # Icon in racepicker GUI if another race has already been selected
+    prefix: '&8[&5Fairy&8]' # Chat race prefix
+    display_name: '&5Fairy' # Display name in racepicker GUI
+    description: # Lore in racepicker GUI
+      - '&5Fairies&7, a free magical race of spirits'
+      - '&7who call the fey wild thier home.'
+      - '&7Their wings allow them to fly short distances,'
+      - '&7but thier small and light bodies limit thier reach'
+      - '&7and heavily encumber them while wearing heavy armor'
+      - '&8&m                                       '
+      - '&5Fairies &7benefit from'
+      - '&f- &55 &fSeconds of flying'
+      - '&f- &5+20% &fMovement Speed'
+      - '&f- &5+50% &fMagic Resistance'
+      - '&f- &5-50% &fSize'
+      - '&f- &fFall Damage Immunity'
+      - '&7But suffer from'
+      - '&f- &c-50% reach'
+      - '&f- &c-8 Maximum Health'
+      - '&f- &cHeavy Armor encumberment'
+    stat_buffs: # Stat buffs the race provides
+      HEALTH_BONUS: -8
+      MOVEMENT_SPEED_BONUS: 0.2
+      SCALE: -0.5
+      FALLING_RESISTANCE: 1
+      MAGIC_RESISTANCE: 0.5
+    perk_rewards:
+      heavyarmor_movementspeedperpiece_add: -0.5
+      archery_inaccuracy_add: -10
+      heavyarmor_setimmunityfractionbonus_add: -10
+      heavyarmor_sethealingbonus_add: -0.5
+    commands:
+      - lp user %player% permission set bsmp.fairyflight5 true
+    undo_commands:
+      - lp user %player% permission set bsmp.fairyflight5 false
+      - fly %player% disable  
