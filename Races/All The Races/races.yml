@@ -1,0 +1,167 @@
+confirm_button_type: STRUCTURE_VOID:-1
+confirm_button_name: '&aConfirm'
+confirm_button_lore: []
+confirm_button_position: 40
+
+races:
+  dwarf:
+    position: 18 
+    icon: DIAMOND_PICKAXE:-1 # Icon in racepicker GUI
+    icon_locked: BARRIER:-1 # Icon in racepicker GUI if another race has already been selected
+    prefix: '&8[&6Dwarf&8]' # Chat race prefix
+    display_name: '&eDwarf' # Display name in racepicker GUI
+    description: # Lore in racepicker GUI
+      - '&eDwarves&7, a proud hearty race of stout'
+      - '&7bearded folk who call the underground'
+      - '&7their home. Their skill in Mining and '
+      - '&7Smithing is unrivaled, but their short'
+      - '&7legs make it harder to run'
+      - '&8&m                                       '
+      - '&eDwarves &7benefit from'
+      - '&f- &e+20% &fMining Experience'
+      - '&f- &e+20% &fSmithing Experience'
+      - '&f- &e+20% &fHeavy Weapons Experience'
+      - '&f- &e+40% &fExplosion Resistance'
+      - '&f- &e+15% &fMelee Resistance'
+      - '&f- &e+4 &fMaximum Health'
+      - '&7But suffer from'
+      - '&f- &c-15% &fMovement Speed'
+    stat_buffs: # Stat buffs the race provides
+      MINING_EXP_GAIN: 0.2
+      SMITHING_EXP_GAIN_GENERAL: 0.2
+      HEAVY_WEAPONS_EXP_GAIN: 0.2
+      EXPLOSION_RESISTANCE: 0.4
+      MELEE_RESISTANCE: 0.15
+      HEALTH_BONUS: 4
+      MOVEMENT_SPEED_BONUS: -0.15
+      SCALE: -0.1
+    # commands: # This is mostly just an example of how you can execute commands when a race/class is unlocked
+    #   - minecraft:experience add %player% 1 points
+    # Perk rewards should only be used for non-stat related bonusses, those should be defined in stat_buffs. This is for consistency
+    # perk_rewards: # Perk rewards executed when the player picks this race
+    #   examplereward: 1
+  human:
+    position: 22
+    icon: DIAMOND_SWORD:-1
+    icon_locked: BARRIER:-1
+    prefix: '&8[&aHuman&8]'
+    display_name: '&aHuman'
+    description:
+      - '&aHumans&7, an expansionist flexible race'
+      - '&7with the habit of growing their colonies'
+      - '&7and territory. They do not specialize in '
+      - '&7any specific skill and tend to just be'
+      - '&7pretty good at anything'
+      - '&8&m                                       '
+      - '&aHumans &7benefit from'
+      - '&f- &a+10% &fSkill Experience'
+      - '&f- &a+10% &fDamage Resistance'
+      - '&f- &a+20% &fAbility Cooldown Reduction'
+      - '&7But suffer from'
+      - '&f- &aNothing!'
+    stat_buffs:
+      GLOBAL_EXP_GAIN: 0.1
+      DAMAGE_RESISTANCE: 0.1
+      COOLDOWN_REDUCTION: 0.2
+  elf:
+    position: 24
+    icon: BOW:-1
+    icon_locked: BARRIER:-1
+    prefix: '&8[&bElf&8]'
+    display_name: '&bElf'
+    description:
+      - '&bElves&7, an elegant magical race of woodsmen'
+      - '&7who call the forests their home. Their magical'
+      - '&7affinity makes them expert enchanters and'
+      - '&7their long lifespan allows them to perfect'
+      - '&7their combat ability, but their lightweight'
+      - '&7body structure makes them more frail.'
+      - '&8&m                                       '
+      - '&bElves &7benefit from'
+      - '&f- &b+20% &fEnchanting Experience'
+      - '&f- &b+20% &fArchery Experience'
+      - '&f- &b+20% &fLight Weapons Experience'
+      - '&f- &b+25% &fMagic Resistance'
+      - '&f- &b+50% &fFall Damage Resistance'
+      - '&f- &b+10% &fMovement Speed'
+      - '&7But suffer from'
+      - '&f- &c-4 Maximum Health'
+    stat_buffs:
+      ENCHANTING_EXP_GAIN: 0.2
+      ARCHERY_EXP_GAIN: 0.2
+      LIGHT_WEAPONS_EXP_GAIN: 0.2
+      MAGIC_RESISTANCE: 0.25
+      FALLING_RESISTANCE: 0.5
+      MOVEMENT_SPEED_BONUS: 0.1
+      HEALTH_BONUS: -4
+      SCALE: 0.1
+  fairy:
+    position: 26
+    icon: FEATHER:-1 # Icon in racepicker GUI
+    icon_locked: BARRIER:-1 # Icon in racepicker GUI if another race has already been selected
+    prefix: '&8[&5Fairy&8]' # Chat race prefix
+    display_name: '&5Fairy' # Display name in racepicker GUI
+    description: # Lore in racepicker GUI
+      - '&5Fairies&7, a free magical race of spirits'
+      - '&7who call the fey wild thier home.'
+      - '&7Their wings allow them to fly short distances,'
+      - '&7but thier small and light bodies limit thier reach'
+      - '&7and heavily encumber them while wearing heavy armor'
+      - '&8&m                                       '
+      - '&5Fairies &7benefit from'
+      - '&f- &55 &fSeconds of flying'
+      - '&f- &5+20% &fMovement Speed'
+      - '&f- &5+50% &fMagic Resistance'
+      - '&f- &5-50% &fSize'
+      - '&f- &fFall Damage Immunity'
+      - '&7But suffer from'
+      - '&f- &c-50% reach'
+      - '&f- &c-8 Maximum Health'
+      - '&f- &cHeavy Armor encumberment'
+    stat_buffs: # Stat buffs the race provides
+      HEALTH_BONUS: -8
+      MOVEMENT_SPEED_BONUS: 0.2
+      SCALE: -0.5
+      FALLING_RESISTANCE: 1
+      MAGIC_RESISTANCE: 0.5
+    perk_rewards:
+      heavyarmor_movementspeedperpiece_add: -0.5
+      archery_inaccuracy_add: -10
+      heavyarmor_setimmunityfractionbonus_add: -10
+      heavyarmor_sethealingbonus_add: -0.5
+    commands:
+      - lp user %player% permission set bsmp.fairyflight5 true
+    undo_commands:
+      - lp user %player% permission set bsmp.fairyflight5 false
+      - fly %player% disable
+
+  Tabaxi:
+    position: 20
+    icon: RABBIT_FOOT:-1 # Icon in racepicker GUI
+    icon_locked: BARRIER:-1 # Icon in racepicker GUI if another race has already been selected
+    prefix: '&8[&6Tabaxi&8]' # Chat race prefix
+    display_name: '&6Tabaxi' # Display name in racepicker GUI
+    description: # Lore in racepicker GUI
+      - '&6Tabaxi&7, an agile race of feline humanoids'
+      - '&7who call the road thier home.'
+      - '&7Their skill in agility and '
+      - '&7Sneaking is unmatched, but their slim'
+      - '&7bodies make them easy to stun'
+      - '&8&m                                       '
+      - '&6Tabaxi &7benefit from'
+      - '&f- &6+20% &fUnarmed Experience'
+      - '&f- &6+20% &fFishing Experience'
+      - '&f- &6+20% &fLight Armor Experience'
+      - '&f- &6+50% &fFall Damage Resistance'
+      - '&f- &6+20% &fKnockback Resistance'
+      - '&f- &6+20% &fSneak Speed'
+      - '&7But suffer from'
+      - '&f- &c-50% &fStun weakness'
+    stat_buffs: # Stat buffs the race provides
+      KNOCKBACK_RESISTANCE: 0.20
+      SNEAK_MOVEMENT_SPEED_BONUS: 0.20
+      LIGHT_ARMOR_EXP_GAIN: 0.20
+      UNARMED_EXP_GAIN: 0.20
+      FISHING_EXP_GAIN: 0.20
+      FALLING_RESISTANCE: 0.50
+      STUN_RESISTANCE: -0.5

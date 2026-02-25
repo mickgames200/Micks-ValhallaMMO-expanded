@@ -1,0 +1,182 @@
+# ==========================================
+# Mickgames200's Fairy Flight & Mounting – V1.5
+# ==========================================
+
+
+function maxFlyTime(p: player) :: number:
+    if {_p} has permission "bsmp.fairyflight15":
+        return 15
+    else if {_p} has permission "bsmp.fairyflight10":
+        return 10
+    else if {_p} has permission "bsmp.fairyflight8":
+        return 8
+    else if {_p} has permission "bsmp.fairyflight5":
+        return 5
+    else:
+        return 0
+
+
+on damage of a player:
+    if damage cause is fall:
+        stop
+    
+    if attacker is set:
+        set {fly.combat.%victim%} to 15
+        set {fly.rechargewait.%victim%} to 5
+        
+        if attacker is a player:
+            set {fly.combat.%attacker%} to 15
+            set {fly.rechargewait.%attacker%} to 5
+
+        set {_mount} to victim
+        if victim is riding:
+            set {_mount} to vehicle of victim
+            
+        if passengers of {_mount} is set:
+            if damage >= 6:
+                eject any passengers from {_mount}
+                send "&c&lKNOCKED OFF! &7You were bucked off by the impact!" to (passengers of {_mount} and {_mount})
+
+
+on rightclick on a player:
+    if player is riding:
+        make player dismount
+        send action bar "&eDismounted" to player
+        stop
+
+    set {_max} to maxFlyTime(player)
+    if {_max} > 0:
+        if target player is riding:
+            send "&cThat player is already riding someone!" to player
+            stop
+            
+        if maxFlyTime(target player) > 0:
+            send "&cYou cannot ride another Fairy!" to player
+            stop
+            
+        if {fly.combat.%player%} > 0.3:
+            send "&cYou are in combat! Wait %ceil({fly.combat.%player%})%s" to player
+            stop
+            
+        if {fly.combat.%target player%} > 0.3:
+            send "&cThat player is in combat!" to player
+            stop
+        
+        make player ride target player
+        send action bar "&d&lMounted!" to player
+
+
+on join:
+    set {_max} to maxFlyTime(player)
+    if {_max} > 0:
+        set {fly.energy.%player%} to {_max}
+        set {fly.rechargewait.%player%} to 0
+        set {fly.fullshow.%player%} to 0
+        set {fly.hungertick.%player%} to 0
+        set {fly.combat.%player%} to 0
+        delete {fly.locked.%player%}
+        set player's flight mode to true
+
+on death of player:
+    set victim's flight mode to false
+    delete {fly.locked.%victim%}
+    set {fly.combat.%victim%} to 0
+
+on respawn:
+    set {_max} to maxFlyTime(player)
+    if {_max} > 0:
+        set {fly.energy.%player%} to {_max}
+        set {fly.rechargewait.%player%} to 0
+        set {fly.combat.%player%} to 0
+        delete {fly.locked.%player%}
+        wait 5 ticks
+        set player's flight mode to true
+
+
+every 0.1 seconds:
+    loop all players:
+        set {_max} to maxFlyTime(loop-player)
+        
+        if {fly.combat.%loop-player%} > 0:
+            remove 0.1 from {fly.combat.%loop-player%}
+            if {fly.combat.%loop-player%} < 0.2:
+                set {fly.combat.%loop-player%} to 0
+
+        if {_max} <= 0:
+            if loop-player's flight mode is true:
+                set loop-player's flight mode to false
+            continue
+
+        if {fly.energy.%loop-player%} is not set:
+            set {fly.energy.%loop-player%} to {_max}
+
+        if loop-player is flying:
+            if {fly.locked.%loop-player%} is true:
+                set loop-player's flight mode to false
+                continue
+
+            remove 0.1 from {fly.energy.%loop-player%}
+
+            add 1 to {fly.hungertick.%loop-player%}
+            if {fly.hungertick.%loop-player%} >= 20:
+                if food level of loop-player > 0:
+                    remove 1 from food level of loop-player
+                set {fly.hungertick.%loop-player%} to 0
+
+            set {_percent} to round(({fly.energy.%loop-player%} / {_max}) * 100)
+            
+            if {fly.combat.%loop-player%} > 0:
+                send action bar "&cCombat Mode &7| &dFlight: &f%{_percent}%%%" to loop-player
+            else:
+                send action bar "&dFairy Flight: &f%{_percent}%%%" to loop-player
+
+            if {fly.energy.%loop-player%} <= 0:
+                set {fly.energy.%loop-player%} to 0
+                set {fly.locked.%loop-player%} to true
+                set loop-player's flight mode to false
+                send "&cYour fairy wings have run out!" to loop-player
+                apply slow falling 1 to loop-player for 5 seconds
+
+            set {fly.rechargewait.%loop-player%} to 2 
+            set {fly.fullshow.%loop-player%} to 0
+
+        else:
+            if loop-player is on ground:
+                if {fly.rechargewait.%loop-player%} > 0:
+                    remove 0.1 from {fly.rechargewait.%loop-player%}
+                else:
+                    if {fly.energy.%loop-player%} < {_max}:
+
+                        if {fly.combat.%loop-player%} > 0:
+                            add 0.05 to {fly.energy.%loop-player%}
+                        else:
+                            add 0.1 to {fly.energy.%loop-player%}
+
+                if {fly.energy.%loop-player%} > {_max}:
+                    set {fly.energy.%loop-player%} to {_max}
+
+                set {_percent} to round(({fly.energy.%loop-player%} / {_max}) * 100)
+
+                if {_percent} < 100:
+                    if {fly.combat.%loop-player%} > 0:
+                        send action bar "&cRecharging (Combat Penalty): &f%{_percent}%%%" to loop-player
+                    else:
+                        send action bar "&aRecharging: &f%{_percent}%%%" to loop-player
+                    set {fly.fullshow.%loop-player%} to 0
+                else:
+                    delete {fly.locked.%loop-player%}
+                    if {fly.fullshow.%loop-player%} < 20:
+                        send action bar "&aRecharged: &f100%%" to loop-player
+                        add 1 to {fly.fullshow.%loop-player%}
+                    else:
+                        send action bar "" to loop-player
+            
+            else:
+                set {_percent} to round(({fly.energy.%loop-player%} / {_max}) * 100)
+                if {_percent} < 100:
+                    send action bar "&eLanded required to recharge: &f%{_percent}%%%" to loop-player
+
+            if {fly.energy.%loop-player%} > 0:
+                if {fly.locked.%loop-player%} is not set:
+                    if loop-player's flight mode is false:
+                        set loop-player's flight mode to true
