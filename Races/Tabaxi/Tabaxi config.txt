@@ -1,0 +1,30 @@
+  Tabaxi:
+    position: 20
+    icon: RABBIT_FOOT:-1 # Icon in racepicker GUI
+    icon_locked: BARRIER:-1 # Icon in racepicker GUI if another race has already been selected
+    prefix: '&8[&6Tabaxi&8]' # Chat race prefix
+    display_name: '&6Tabaxi' # Display name in racepicker GUI
+    description: # Lore in racepicker GUI
+      - '&6Tabaxi&7, an agile race of feline humanoids'
+      - '&7who call the road thier home.'
+      - '&7Their skill in agility and '
+      - '&7Sneaking is unmatched, but their slim'
+      - '&7bodies make them easy to stun'
+      - '&8&m                                       '
+      - '&6Tabaxi &7benefit from'
+      - '&f- &6+20% &fUnarmed Experience'
+      - '&f- &6+20% &fFishing Experience'
+      - '&f- &6+20% &fLight Armor Experience'
+      - '&f- &6+50% &fFall Damage Resistance'
+      - '&f- &6+20% &fKnockback Resistance'
+      - '&f- &6+20% &fSneak Speed'
+      - '&7But suffer from'
+      - '&f- &c-50% &fStun weakness'
+    stat_buffs: # Stat buffs the race provides
+      KNOCKBACK_RESISTANCE: 0.20
+      SNEAK_MOVEMENT_SPEED_BONUS: 0.20
+      LIGHT_ARMOR_EXP_GAIN: 0.20
+      UNARMED_EXP_GAIN: 0.20
+      FISHING_EXP_GAIN: 0.20
+      FALLING_RESISTANCE: 0.50
+      STUN_RESISTANCE: -0.5
